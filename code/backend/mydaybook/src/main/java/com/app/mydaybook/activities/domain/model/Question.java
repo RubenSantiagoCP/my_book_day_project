@@ -1,5 +1,4 @@
-package com.app.mydaybook.domain.model.activities;
-
+package com.app.mydaybook.activities.domain.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,9 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-
-public class EmotionalState {
+public class Question {
     private Long id;
-    private String name;
-    private String comments;
+    private String question;
+    private boolean isActive;
 }

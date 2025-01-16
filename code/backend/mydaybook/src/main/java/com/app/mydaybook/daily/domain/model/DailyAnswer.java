@@ -1,6 +1,7 @@
-package com.app.mydaybook.domain.model.daily;
+package com.app.mydaybook.daily.domain.model;
 
-import com.app.mydaybook.domain.model.activities.Task;
+import com.app.mydaybook.activities.domain.model.Question;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,9 +14,9 @@ import lombok.Setter;
 @Setter
 @Builder
 
-public class DailyTask {
+public class DailyAnswer {
     private Long id;
     private DailyRecord dailyRecord;
-    private Task task;
-    private boolean isCompleted;
+    private Question question;
+    private String answer;
 }

@@ -1,6 +1,6 @@
-package com.app.mydaybook.application.ports.output;
+package com.app.mydaybook.activities.application.ports.output;
 
-import com.app.mydaybook.domain.model.activities.Task;
+import com.app.mydaybook.activities.domain.model.Task;
 
 public interface ITaskCommandPersistentPort {
     Task createTask(Task task);

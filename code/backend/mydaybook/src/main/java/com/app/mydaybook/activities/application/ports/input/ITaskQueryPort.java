@@ -1,8 +1,8 @@
-package com.app.mydaybook.application.ports.input.activities;
+package com.app.mydaybook.activities.application.ports.input;
 
 import java.util.List;
 
-import com.app.mydaybook.domain.model.activities.Task;
+import com.app.mydaybook.activities.domain.model.Task;
 
 public interface ITaskQueryPort {
     List<Task> getAllTasks();

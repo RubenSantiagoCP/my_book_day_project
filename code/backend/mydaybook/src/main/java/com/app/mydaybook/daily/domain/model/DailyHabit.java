@@ -1,6 +1,7 @@
-package com.app.mydaybook.domain.model.daily;
+package com.app.mydaybook.daily.domain.model;
 
-import java.util.Date;
+import com.app.mydaybook.activities.domain.model.Habit;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,10 +14,9 @@ import lombok.Setter;
 @Setter
 @Builder
 
-public class DailyImage {
+public class DailyHabit {
     private Long id;
     private DailyRecord dailyRecord;
-    private String imageURL;
-    private String description;
-    private Date uploadAt;
+    private Habit habit;
+    private boolean isCompleted;
 }

@@ -1,10 +1,10 @@
-package com.app.mydaybook.application.service;
+package com.app.mydaybook.activities.application.service;
 
 import org.springframework.stereotype.Service;
 
-import com.app.mydaybook.application.ports.input.activities.ITaskCommandPort;
-import com.app.mydaybook.application.ports.output.ITaskCommandPersistentPort;
-import com.app.mydaybook.domain.model.activities.Task;
+import com.app.mydaybook.activities.application.ports.input.ITaskCommandPort;
+import com.app.mydaybook.activities.application.ports.output.ITaskCommandPersistentPort;
+import com.app.mydaybook.activities.domain.model.Task;
 
 import lombok.RequiredArgsConstructor;
 
