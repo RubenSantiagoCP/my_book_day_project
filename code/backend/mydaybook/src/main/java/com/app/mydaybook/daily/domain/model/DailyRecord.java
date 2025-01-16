@@ -1,6 +1,6 @@
-package com.app.mydaybook.domain.model.daily;
+package com.app.mydaybook.daily.domain.model;
 
-import com.app.mydaybook.domain.model.activities.EmotionalState;
+import com.app.mydaybook.activities.domain.model.EmotionalState;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

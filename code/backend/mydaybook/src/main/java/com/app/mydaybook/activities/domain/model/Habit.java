@@ -1,8 +1,9 @@
-package com.app.mydaybook.domain.model.activities;
+package com.app.mydaybook.activities.domain.model;
 
 import java.util.Date;
 
-import com.app.mydaybook.domain.enums.HabitFrecuency;
+import com.app.mydaybook.activities.domain.enums.HabitFrecuency;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

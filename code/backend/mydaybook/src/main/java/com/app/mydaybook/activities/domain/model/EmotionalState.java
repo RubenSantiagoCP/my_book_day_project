@@ -1,6 +1,5 @@
-package com.app.mydaybook.domain.model.daily;
+package com.app.mydaybook.activities.domain.model;
 
-import com.app.mydaybook.domain.model.activities.Habit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,9 +12,8 @@ import lombok.Setter;
 @Setter
 @Builder
 
-public class DailyHabit {
+public class EmotionalState {
     private Long id;
-    private DailyRecord dailyRecord;
-    private Habit habit;
-    private boolean isCompleted;
+    private String name;
+    private String comments;
 }
