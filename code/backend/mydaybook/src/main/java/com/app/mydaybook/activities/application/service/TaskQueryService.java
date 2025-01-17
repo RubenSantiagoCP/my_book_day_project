@@ -8,10 +8,10 @@ import com.app.mydaybook.activities.application.ports.input.ITaskQueryPort;
 import com.app.mydaybook.activities.application.ports.output.ITaskQueryPersistentPort;
 import com.app.mydaybook.activities.domain.model.Task;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TaskQueryService implements ITaskQueryPort {
     private final ITaskQueryPersistentPort taskQueryPersistentPort;
 
