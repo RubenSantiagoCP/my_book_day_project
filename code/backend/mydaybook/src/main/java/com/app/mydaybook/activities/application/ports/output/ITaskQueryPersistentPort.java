@@ -5,6 +5,6 @@ import java.util.List;
 import com.app.mydaybook.activities.domain.model.Task;
 
 public interface ITaskQueryPersistentPort {
-    List<Task> getAllTasks();
-    Task getTaskById(Long id);
+    public List<Task> getAllTasks();
+    public Task getTaskById(Long id);
 }
