@@ -2,8 +2,7 @@ package com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.e
 
 import java.time.LocalDateTime;
 
-import com.app.mydaybook.activities.domain.enums.TaskFrequency;
-import com.app.mydaybook.activities.domain.enums.TaskState;
+import com.app.mydaybook.activities.domain.enums.HabitFrecuency;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,8 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,26 +21,23 @@ import lombok.Setter;
 
 @Entity
 @Table(
-    name = "task",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"title", "startDate"})
+    name = "habit"
 )
-
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class TaskEntity {
+public class HabitEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    @NotBlank
     @Size(max = 100)
-    private String title;
+    private String name;
 
     @Column
     @Size(max = 500)
@@ -56,13 +50,8 @@ public class TaskEntity {
     private LocalDateTime endDate;
 
     @Column(nullable = false)
-    private int priority;
-
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TaskFrequency frequency;
+    private HabitFrecuency frequency;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TaskState state;
+    private CategoryEntity category;
 }
