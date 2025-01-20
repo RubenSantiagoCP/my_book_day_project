@@ -1,6 +1,8 @@
 package com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.mapper;
 
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -13,4 +15,8 @@ public interface ICategoryJpaMapper {
     Category toCategory(CategoryEntity categoryEntity);
 
     CategoryEntity toCategoryEntity(Category category);
+
+    List<Category> toCategoryList(List<CategoryEntity> lstCategoryEntities);
+
+    List<CategoryEntity> toCategoryEntities(List<Category> categories);
 }
