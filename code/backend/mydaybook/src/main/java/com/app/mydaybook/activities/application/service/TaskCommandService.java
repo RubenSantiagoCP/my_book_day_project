@@ -21,11 +21,16 @@ public class TaskCommandService implements ITaskCommandPort{
     @Override
     public Task createTask(Task task) {
         establistValueDefault(task);
+        validateEndDate(task);
+        validateFrecuency(task);
         return taskCommandPersistentPort.createTask(task);
     }
 
     @Override
     public Task updateTask(Long id, Task task) {
+        establistValueDefault(task);
+        validateEndDate(task);
+        validateFrecuency(task);
         return taskCommandPersistentPort.updateTask(id, task);
     }
 
@@ -37,11 +42,6 @@ public class TaskCommandService implements ITaskCommandPort{
 
     private void establistValueDefault(Task task) {
 
-        //Set default values for frequency
-        if(task.getFrequency() == null) {
-            task.setFrequency(TaskFrequency.NONE);
-        }
-
         //Set default values for state
         if(task.getState() == null) {
             task.setState(TaskState.PENDING);
@@ -51,9 +51,31 @@ public class TaskCommandService implements ITaskCommandPort{
         if(task.getStartDate() == null) {
             task.setStartDate(LocalDateTime.now());
         }
+    }
 
+    private void validateEndDate(Task task) {
+        //Set default values for endDate
         if(task.getEndDate() == null) {
-            task.setEndDate( task.getStartDate());
+            task.setEndDate(task.getStartDate());
+        }
+
+        if(task.getEndDate().isBefore(task.getStartDate())) {
+            throw new IllegalArgumentException("The end date must be after the start date");
+        }
+    }
+
+    private void validateFrecuency(Task task) {
+        //Set default values for frecuency
+        if(task.getFrequency() == null) {
+            task.setFrequency(TaskFrequency.NONE);
+        }
+
+        if(task.getStartDate().toLocalDate().isBefore(task.getEndDate().toLocalDate())) {
+            task.setFrequency(TaskFrequency.DAILY);
+        }
+
+        if(task.getStartDate().equals(task.getEndDate())) {
+            task.setFrequency(TaskFrequency.NONE);
         }
     }
 }

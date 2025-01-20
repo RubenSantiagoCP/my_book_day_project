@@ -26,14 +26,19 @@ public class TaskCommandJpaAdapter implements ITaskCommandPersistentPort{
 
     @Override
     public Task updateTask(Long id, Task task) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateTask'");
+        TaskEntity taskEntity = taskJpaMapper.toTaskEntity(task);
+        taskEntity = taskRepository.save(taskEntity);
+        return taskJpaMapper.toTask(taskEntity);
     }
 
     @Override
     public boolean deleteTask(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteTask'");
+        TaskEntity taskEntity = taskRepository.findById(id).orElseThrow();
+        if(taskEntity!=null){
+            taskRepository.delete(taskEntity);
+            return true;
+        }
+        return false;
     }
     
 }

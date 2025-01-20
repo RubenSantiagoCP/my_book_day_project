@@ -7,22 +7,22 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import com.app.mydaybook.activities.domain.model.Task;
-import com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.request.TaskCreateRequest;
-import com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.response.TaskCreateResponse;
+import com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.request.TaskRequest;
+import com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.response.TaskResponse;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ITaskRestMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "state", ignore = true)
-    Task toTask(TaskCreateRequest taskCreateRequest);
+    Task toTask(TaskRequest taskRequest);
     
-    TaskCreateRequest toTaskCreateRequest(Task task);
+    TaskRequest toTaskRequest(Task task);
 
-    List<Task> toTaskList(List<TaskCreateRequest> taskCreateRequests);
+    List<Task> toTaskList(List<TaskRequest> taskRequests);
 
-    List<TaskCreateRequest> toTaskCreateRequestList(List<Task> tasks);
+    List<TaskResponse> toTaskResponseList(List<Task> tasks);
 
-    TaskCreateResponse toTaskCreateResponse(Task task);
+    TaskResponse toTaskResponse(Task task);
 
 }
