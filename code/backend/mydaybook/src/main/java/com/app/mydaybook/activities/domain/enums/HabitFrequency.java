@@ -1,7 +1,6 @@
 package com.app.mydaybook.activities.domain.enums;
 
-public enum HabitFrecuency {
-    NONE,
+public enum HabitFrequency {
     DAILY,
     WEEKLY,
     MONTHLY,

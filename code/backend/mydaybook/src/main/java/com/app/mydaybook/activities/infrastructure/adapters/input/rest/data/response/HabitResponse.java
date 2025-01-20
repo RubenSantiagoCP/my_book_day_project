@@ -1,8 +1,9 @@
-package com.app.mydaybook.activities.domain.model;
+package com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.response;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import com.app.mydaybook.activities.domain.enums.HabitFrequency;
+import com.app.mydaybook.activities.domain.model.Category;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,18 +11,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 
-public class Habit {
+public class HabitResponse {
     private Long id;
     private String name;
     private String description;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private Date startDate;
+    private Date endDate;
     private HabitFrequency frequency;
     private Category category;
 }
