@@ -11,6 +11,8 @@ import com.app.mydaybook.activities.domain.model.Task;
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.entity.TaskEntity;
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.mapper.ITaskJpaMapper;
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.repository.ITaskRepository;
+import com.app.mydaybook.common.enums.exception.ErrorCode;
+import com.app.mydaybook.common.exception.ExceptionManager;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +23,8 @@ public class TaskQueryJpaAdapter implements ITaskQueryPersistentPort {
     private final ITaskRepository taskRepository;
     private final ITaskJpaMapper taskJpaMapper;
 
+    private final ExceptionManager exceptionManager;
+
     @Override
     public List<Task> getAllTasks() {
         List<TaskEntity> lTaskEntities = taskRepository.findAll();
@@ -29,7 +33,7 @@ public class TaskQueryJpaAdapter implements ITaskQueryPersistentPort {
 
     @Override
     public Task getTaskById(Long id) {
-        TaskEntity taskEntity = taskRepository.findById(id).orElseThrow();
+        TaskEntity taskEntity = taskRepository.findById(id).orElseThrow(() -> exceptionManager.createException(ErrorCode.TASK_NOT_FOUND) );
         return taskJpaMapper.toTask(taskEntity);
     }
 
