@@ -1,0 +1,3 @@
+spring:
+  config:
+    import: classpath:/error-codes/activities/activities-error-codes.yml
