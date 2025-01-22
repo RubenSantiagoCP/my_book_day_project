@@ -4,9 +4,9 @@ import org.springframework.stereotype.Component;
 
 import com.app.mydaybook.common.enums.exception.ErrorCode;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Component
 public class ExceptionManager {
     

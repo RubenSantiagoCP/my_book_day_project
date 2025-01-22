@@ -1,5 +1,6 @@
 package com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import com.app.mydaybook.activities.application.ports.output.ITaskCommandPersistentPort;
@@ -7,6 +8,8 @@ import com.app.mydaybook.activities.domain.model.Task;
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.entity.TaskEntity;
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.mapper.ITaskJpaMapper;
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.repository.ITaskRepository;
+import com.app.mydaybook.common.enums.exception.ErrorCode;
+import com.app.mydaybook.common.exception.ExceptionManager;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,12 +19,18 @@ public class TaskCommandJpaAdapter implements ITaskCommandPersistentPort{
 
     private final ITaskRepository taskRepository;
     private final ITaskJpaMapper taskJpaMapper;
+    private final ExceptionManager exceptionManager;
+
 
     @Override
     public Task createTask(Task task) {
         TaskEntity taskEntity = taskJpaMapper.toTaskEntity(task);
-        taskEntity = taskRepository.save(taskEntity);
-        return taskJpaMapper.toTask(taskEntity);
+        try{
+            taskEntity = taskRepository.save(taskEntity);
+            return taskJpaMapper.toTask(taskEntity);
+        }catch(DataIntegrityViolationException ex){
+            throw exceptionManager.createException(ErrorCode.TASK_ALREADY_EXISTS);
+        }
     }
 
     @Override

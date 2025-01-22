@@ -1,9 +1,0 @@
-activities-error-codes:
-  HABIT_NOT_FOUND: Habit not found
-  HABIT_ALREADY_EXISTS: Habit already exists
-  HABIT_NAME_REQUIRED: Habit name is required
-  HABIT_START_DATE_REQUIRED: Habit start date is required
-  HABIT_END_DATE_REQUIRED: Habit end date is required
-  TASK_NOT_FOUND: Task not found
-  TASK_ALREADY_EXISTS: Task already exists
-  TASK_NAME_REQUIRED: Task name is required

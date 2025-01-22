@@ -5,16 +5,13 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.app.mydaybook.activities.config.ErrorCodesConfig;
-
-import lombok.RequiredArgsConstructor;
+import com.app.mydaybook.activities.config.ActivitiesErrorCodesConfig;
 
 @Service
-@RequiredArgsConstructor
 public class ErrorMessagesService {
-    private final Map<String, String> errorMessages = new HashMap<>();
+    private Map<String, String> errorMessages = new HashMap<>();
 
-    public ErrorMessagesService(ErrorCodesConfig errorCodesConfig) {
+    public ErrorMessagesService(ActivitiesErrorCodesConfig errorCodesConfig) {
         errorMessages.putAll(errorCodesConfig.getMessages());
     }
 
