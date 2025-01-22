@@ -18,8 +18,4 @@ public class ErrorMessagesService {
     public String getMessage(String errorCode){
         return errorMessages.getOrDefault(errorCode, "Unknown error");
     }
-
-    public Map<String, String> getErrorMessages() {
-        return errorMessages;
-    }
 }

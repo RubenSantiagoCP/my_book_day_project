@@ -13,7 +13,6 @@ public class ExceptionManager {
     private final ErrorMessagesService errorMessagesService;
 
     public CustomException createException(ErrorCode errorCode){
-        System.out.println(errorMessagesService.getErrorMessages());
         String message = errorMessagesService.getMessage(errorCode.toString());
         return new CustomException(errorCode.toString(), message);
     }
