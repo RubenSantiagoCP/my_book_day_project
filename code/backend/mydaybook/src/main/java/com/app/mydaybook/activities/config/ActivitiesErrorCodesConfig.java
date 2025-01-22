@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "activities-error-codes")
-public class ErrorCodesConfig {
+public class ActivitiesErrorCodesConfig {
     private Map<String, String> messages;
 
     public Map<String, String> getMessages() {
