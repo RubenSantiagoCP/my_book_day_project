@@ -35,21 +35,25 @@ public class TaskCommandJpaAdapter implements ITaskCommandPersistentPort{
 
     @Override
     public Task updateTask(Long id, Task task) {
-        TaskEntity taskEntity = taskRepository.findById(id).orElseThrow();
-        taskEntity.setDescription(task.getDescription());
-        taskEntity.setEndDate(task.getEndDate());
-        taskEntity.setFrequency(task.getFrequency());
-        taskEntity.setPriority(task.getPriority());
-        taskEntity.setStartDate(task.getStartDate());
-        taskEntity.setState(task.getState());
-        taskEntity.setTitle(task.getTitle());
-        taskEntity = taskRepository.save(taskEntity);
-        return taskJpaMapper.toTask(taskEntity);
+        TaskEntity taskEntity = taskRepository.findById(id).orElseThrow(() -> exceptionManager.createException(ErrorCode.TASK_NOT_FOUND));
+        try{
+            taskEntity.setDescription(task.getDescription());
+            taskEntity.setEndDate(task.getEndDate());
+            taskEntity.setFrequency(task.getFrequency());
+            taskEntity.setPriority(task.getPriority());
+            taskEntity.setStartDate(task.getStartDate());
+            taskEntity.setState(task.getState());
+            taskEntity.setTitle(task.getTitle());
+            taskEntity = taskRepository.save(taskEntity);
+            return taskJpaMapper.toTask(taskEntity);
+        }catch(DataIntegrityViolationException ex){
+            throw exceptionManager.createException(ErrorCode.TASK_ALREADY_EXISTS);
+        }
     }
 
     @Override
     public boolean deleteTask(Long id) {
-        TaskEntity taskEntity = taskRepository.findById(id).orElseThrow();
+        TaskEntity taskEntity = taskRepository.findById(id).orElseThrow(() -> exceptionManager.createException(ErrorCode.TASK_NOT_FOUND));
         if(taskEntity!=null){
             taskRepository.delete(taskEntity);
             return true;

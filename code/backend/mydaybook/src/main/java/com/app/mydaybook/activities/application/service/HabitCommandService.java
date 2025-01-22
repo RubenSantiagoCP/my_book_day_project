@@ -8,6 +8,9 @@ import com.app.mydaybook.activities.application.ports.output.IHabitCommandPersis
 import com.app.mydaybook.activities.domain.enums.HabitFrequency;
 import com.app.mydaybook.activities.domain.model.Category;
 import com.app.mydaybook.activities.domain.model.Habit;
+import com.app.mydaybook.common.enums.exception.ErrorCode;
+import com.app.mydaybook.common.exception.ExceptionManager;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -15,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class HabitCommandService implements IHabitCommandPort {
 
     private final IHabitCommandPersistentPort habitCommandPersistentPort;
+    private final ExceptionManager exceptionManager;
 
     @Override
     public Habit createHabit(Habit habit) {
@@ -42,11 +46,12 @@ public class HabitCommandService implements IHabitCommandPort {
     private void validateEndDate(Habit habit) {
         // Set default values for endDate
         if (habit.getEndDate() == null) {
-            throw new IllegalArgumentException("The end date is required");
+            throw exceptionManager.createException(ErrorCode.HABIT_END_DATE_REQUIRED);
         }
 
         if (habit.getEndDate().isBefore(habit.getStartDate())) {
-            throw new IllegalArgumentException("The end date must be after the start date");
+            throw exceptionManager.createException(ErrorCode.END_DATE_BEFORE_START_DATE);
+
         }
     }
 

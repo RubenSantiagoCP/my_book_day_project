@@ -9,6 +9,8 @@ import com.app.mydaybook.activities.application.ports.output.ITaskCommandPersist
 import com.app.mydaybook.activities.domain.enums.TaskFrequency;
 import com.app.mydaybook.activities.domain.enums.TaskState;
 import com.app.mydaybook.activities.domain.model.Task;
+import com.app.mydaybook.common.enums.exception.ErrorCode;
+import com.app.mydaybook.common.exception.ExceptionManager;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 public class TaskCommandService implements ITaskCommandPort{
     private final ITaskCommandPersistentPort taskCommandPersistentPort;
+    private final ExceptionManager exceptionManager;
 
     @Override
     public Task createTask(Task task) {
@@ -60,7 +63,7 @@ public class TaskCommandService implements ITaskCommandPort{
         }
 
         if(task.getEndDate().isBefore(task.getStartDate())) {
-            throw new IllegalArgumentException("The end date must be after the start date");
+            throw exceptionManager.createException(ErrorCode.END_DATE_BEFORE_START_DATE);
         }
     }
 
