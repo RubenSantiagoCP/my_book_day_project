@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.mydaybook.activities.application.ports.input.ITaskCommandPort;
 import com.app.mydaybook.activities.application.ports.output.ITaskCommandPersistentPort;
+import com.app.mydaybook.activities.application.ports.output.ITaskQueryPersistentPort;
 import com.app.mydaybook.activities.domain.enums.TaskFrequency;
 import com.app.mydaybook.activities.domain.enums.TaskState;
 import com.app.mydaybook.activities.domain.model.Task;
@@ -19,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 
 public class TaskCommandService implements ITaskCommandPort{
     private final ITaskCommandPersistentPort taskCommandPersistentPort;
+    private final ITaskQueryPersistentPort taskQueryPersistentPort;
+
     private final ExceptionManager exceptionManager;
 
     @Override
@@ -26,6 +29,7 @@ public class TaskCommandService implements ITaskCommandPort{
         establistValueDefault(task);
         validateEndDate(task);
         validateFrecuency(task);
+        validateConflictExists(task);
         return taskCommandPersistentPort.createTask(task);
     }
 
@@ -34,6 +38,7 @@ public class TaskCommandService implements ITaskCommandPort{
         establistValueDefault(task);
         validateEndDate(task);
         validateFrecuency(task);
+        validateConflictExists(task);
         return taskCommandPersistentPort.updateTask(id, task);
     }
 
@@ -79,6 +84,13 @@ public class TaskCommandService implements ITaskCommandPort{
 
         if(task.getStartDate().equals(task.getEndDate())) {
             task.setFrequency(TaskFrequency.NONE);
+        }
+    }
+
+    private void validateConflictExists(Task task) {
+        boolean confictExists =  taskQueryPersistentPort.existsConflictByUserAndTitleAndDateRange(task);
+        if(confictExists){
+            throw exceptionManager.createException(ErrorCode.TASK_ALREADY_EXISTS);
         }
     }
 }

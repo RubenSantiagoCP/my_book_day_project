@@ -1,7 +1,6 @@
 package com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter;
 
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -26,21 +25,31 @@ public class TaskQueryJpaAdapter implements ITaskQueryPersistentPort {
     private final ExceptionManager exceptionManager;
 
     @Override
-    public List<Task> getAllTasks() {
-        List<TaskEntity> lTaskEntities = taskRepository.findAll();
-        return taskJpaMapper.toTaskList(lTaskEntities); 
-    }
-
-    @Override
     public Task getTaskById(Long id) {
-        TaskEntity taskEntity = taskRepository.findById(id).orElseThrow(() -> exceptionManager.createException(ErrorCode.TASK_NOT_FOUND) );
+        TaskEntity taskEntity = taskRepository.findById(id)
+                .orElseThrow(() -> exceptionManager.createException(ErrorCode.TASK_NOT_FOUND));
         return taskJpaMapper.toTask(taskEntity);
     }
 
     @Override
-    public boolean existsTaskInDate(LocalDateTime date, String title) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'existsTaskInDate'");
+    public List<Task> getTasksByUserId(Long userId) {
+        List<TaskEntity> lTaskEntities = taskRepository.findByUserId(userId);
+        return taskJpaMapper.toTaskList(lTaskEntities);
     }
-    
+
+    @Override
+    public List<Task> getTasksByDate(Long userId, LocalDate date) {
+        List<TaskEntity> lTaskEntities = taskRepository.findTasksByUserIdAndDate(userId, date);
+        return taskJpaMapper.toTaskList(lTaskEntities);
+    }
+
+    @Override
+    public boolean existsConflictByUserAndTitleAndDateRange(Task task) {
+        return taskRepository.existsConflictByUserAndTitleAndDateRange(
+                task.getUser().getId(),
+                task.getTitle(),
+                task.getStartDate(),
+                task.getEndDate());
+    }
+
 }

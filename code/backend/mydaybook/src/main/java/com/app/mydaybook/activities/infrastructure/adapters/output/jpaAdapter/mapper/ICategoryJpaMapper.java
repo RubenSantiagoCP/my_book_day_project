@@ -16,20 +16,24 @@ public interface ICategoryJpaMapper {
     @Mapping(target = "user.tasks", ignore = true)
     @Mapping(target = "user.habits", ignore = true)
     @Mapping(target = "user.categories", ignore = true)
+    @Mapping(target = "habits", ignore = true)
     Category toCategory(CategoryEntity categoryEntity);
 
     @Mapping(target = "user.tasks", ignore = true)
     @Mapping(target = "user.habits", ignore = true)
     @Mapping(target = "user.categories", ignore = true)
+    @Mapping(target = "habits", ignore = true)
     CategoryEntity toCategoryEntity(Category category);
 
     @Mapping(target = "user.tasks", ignore = true)
     @Mapping(target = "user.habits", ignore = true)
     @Mapping(target = "user.categories", ignore = true)
+    @Mapping(target = "habits", ignore = true)
     List<Category> toCategoryList(List<CategoryEntity> lstCategoryEntities);
 
     @Mapping(target = "user.tasks", ignore = true)
     @Mapping(target = "user.habits", ignore = true)
     @Mapping(target = "user.categories", ignore = true)
+    @Mapping(target = "habits", ignore = true)
     List<CategoryEntity> toCategoryEntities(List<Category> categories);
 }

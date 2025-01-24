@@ -1,5 +1,7 @@
 package com.app.mydaybook.activities.domain.model;
 
+import java.util.List;
+
 import com.app.mydaybook.user.domain.model.User;
 
 import lombok.AllArgsConstructor;
@@ -19,4 +21,5 @@ public class Category {
     private String name;
     private String description;
     private User user;
+    private List<Habit> habits;
 }
