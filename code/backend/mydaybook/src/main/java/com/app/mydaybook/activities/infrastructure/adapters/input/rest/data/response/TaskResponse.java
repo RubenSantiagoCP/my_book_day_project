@@ -37,4 +37,6 @@ public class TaskResponse {
     private TaskFrequency frequency;
 
     private TaskState state;
+
+    private Long userId;
 }

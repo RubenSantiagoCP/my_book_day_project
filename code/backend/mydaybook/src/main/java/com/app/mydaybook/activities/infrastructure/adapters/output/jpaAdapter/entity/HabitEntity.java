@@ -3,6 +3,7 @@ package com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.e
 import java.time.LocalDateTime;
 
 import com.app.mydaybook.activities.domain.enums.HabitFrequency;
+import com.app.mydaybook.user.infrastructure.adapters.output.jpaAdapter.entity.UserEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,4 +59,8 @@ public class HabitEntity {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private CategoryEntity category;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 }

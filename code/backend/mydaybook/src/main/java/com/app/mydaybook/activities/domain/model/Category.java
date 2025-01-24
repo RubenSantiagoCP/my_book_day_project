@@ -1,5 +1,7 @@
 package com.app.mydaybook.activities.domain.model;
 
+import com.app.mydaybook.user.domain.model.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,4 +18,5 @@ public class Category {
     private Long id;
     private String name;
     private String description;
+    private User user;
 }

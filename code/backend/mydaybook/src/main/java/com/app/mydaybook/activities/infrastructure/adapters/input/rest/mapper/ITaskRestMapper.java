@@ -13,16 +13,13 @@ import com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.resp
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ITaskRestMapper {
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "state", ignore = true)
+    @Mapping(target = "user.id", source = "userId")
     Task toTask(TaskRequest taskRequest);
     
-    TaskRequest toTaskRequest(Task task);
-
-    List<Task> toTaskList(List<TaskRequest> taskRequests);
-
+    @Mapping(target = "userId", source = "user.id")
     List<TaskResponse> toTaskResponseList(List<Task> tasks);
 
+    @Mapping(target = "userId", source = "user.id")
     TaskResponse toTaskResponse(Task task);
 
 }

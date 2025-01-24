@@ -46,4 +46,7 @@ public class TaskRequest {
     public boolean isEndTimeAfterStartTime() {
         return startDate != null && endDate != null && endDate.isAfter(startDate);
     }
+
+    @NotNull(message = "The user id is required")
+    private Long userId;
 }
