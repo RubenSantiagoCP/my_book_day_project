@@ -1,7 +1,11 @@
 package com.app.mydaybook.user.domain.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.app.mydaybook.activities.domain.model.Category;
+import com.app.mydaybook.activities.domain.model.Habit;
+import com.app.mydaybook.activities.domain.model.Task;
 import com.app.mydaybook.user.domain.enums.LoginType;
 
 import lombok.AllArgsConstructor;
@@ -25,4 +29,8 @@ public class User {
     private String name;
     private String surname;
     private LocalDateTime createdAt;
+
+    private List<Habit> habits;
+    private List<Task> tasks;
+    private List<Category> categories;
 }

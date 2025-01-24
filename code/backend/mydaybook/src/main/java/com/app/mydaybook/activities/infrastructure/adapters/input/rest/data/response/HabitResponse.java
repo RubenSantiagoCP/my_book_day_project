@@ -1,9 +1,9 @@
 package com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.response;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.app.mydaybook.activities.domain.enums.HabitFrequency;
-import com.app.mydaybook.activities.domain.model.Category;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,8 +21,16 @@ public class HabitResponse {
     private Long id;
     private String name;
     private String description;
-    private Date startDate;
-    private Date endDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime endDate;
+
     private HabitFrequency frequency;
-    private Category category;
+    
+    private Long categoryId;
+
+    private Long userId;
 }

@@ -1,5 +1,7 @@
 package com.app.mydaybook.user.application.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
 import com.app.mydaybook.user.application.ports.input.IUserCommandPort;
@@ -16,6 +18,7 @@ public class UserCommandService implements IUserCommandPort{
 
     @Override
     public User createUser(User user) {
+        user.setCreatedAt(LocalDateTime.now());
         return userCommandPersistentPort.createUser(user);
     }
 

@@ -14,12 +14,14 @@ import com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.resp
 public interface IHabitRestMapper {
 
     @Mapping(target = "category.id", source = "categoryId")
+    @Mapping(target = "user.id", source = "userId")
     Habit toHabit(HabitRequest habitRequest);
 
-    HabitRequest toHabitRequest(Habit habit);
-
+    @Mapping(target = "userId", source = "user.id")
+    @Mapping(target = "categoryId", source = "category.id")
     HabitResponse toHabitResponse(Habit habit);
 
+    @Mapping(target = "userId", source = "user.id")
     List<HabitResponse> toHabitResponseList(List<Habit> habits);
     
 }

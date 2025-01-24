@@ -3,6 +3,7 @@ package com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.req
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,4 +23,7 @@ public class CategoryRequest {
     private String name;
     
     private String description;
+
+    @NotNull(message = "The user id is required")
+    private Long userId;
 }

@@ -1,7 +1,11 @@
 package com.app.mydaybook.user.infrastructure.adapters.output.jpaAdapter.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.entity.CategoryEntity;
+import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.entity.HabitEntity;
+import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.entity.TaskEntity;
 import com.app.mydaybook.user.domain.enums.LoginType;
 
 import jakarta.persistence.Column;
@@ -11,6 +15,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -60,5 +65,14 @@ public class UserEntity {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "user")
+    private List<HabitEntity> habits;
+
+    @OneToMany(mappedBy = "user")
+    private List<TaskEntity> tasks;
+
+    @OneToMany(mappedBy = "user")
+    private List<CategoryEntity> categories;
 
 }

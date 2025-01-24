@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.app.mydaybook.activities.domain.enums.TaskFrequency;
 import com.app.mydaybook.activities.domain.enums.TaskState;
+import com.app.mydaybook.user.infrastructure.adapters.output.jpaAdapter.entity.UserEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +13,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -65,4 +68,8 @@ public class TaskEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TaskState state;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 }

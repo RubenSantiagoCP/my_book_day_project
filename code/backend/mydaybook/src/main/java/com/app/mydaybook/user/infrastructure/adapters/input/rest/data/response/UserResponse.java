@@ -1,6 +1,9 @@
 package com.app.mydaybook.user.infrastructure.adapters.input.rest.data.response;
 
+import java.time.LocalDateTime;
+
 import com.app.mydaybook.user.domain.enums.LoginType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +23,8 @@ public class UserResponse {
     private String email;
     private String name;
     private String surname;
-    private String createdAt;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
     private LoginType loginType;
 }

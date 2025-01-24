@@ -40,4 +40,7 @@ public class HabitRequest {
     private HabitFrequency frequency;
 
     private Long categoryId;
+
+    @NotNull(message = "The user id is required")
+    private Long userId;
 }

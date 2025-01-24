@@ -3,6 +3,7 @@ package com.app.mydaybook.activities.domain.model;
 import java.time.LocalDateTime;
 import com.app.mydaybook.activities.domain.enums.TaskFrequency;
 import com.app.mydaybook.activities.domain.enums.TaskState;
+import com.app.mydaybook.user.domain.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,4 +26,5 @@ public class Task {
     private int priority;
     private TaskFrequency frequency;
     private TaskState state;
+    private User user;
 }
