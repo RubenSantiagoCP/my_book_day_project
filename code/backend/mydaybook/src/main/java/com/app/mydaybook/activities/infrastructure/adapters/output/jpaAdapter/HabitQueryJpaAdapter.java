@@ -1,5 +1,6 @@
 package com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -28,8 +29,14 @@ public class HabitQueryJpaAdapter implements IHabitQueryPersistentPort{
     }
 
     @Override
-    public List<Habit> getAllHabits() {
-        List<HabitEntity> lstHabitEntities = habitRepository.findAll();
+    public List<Habit> getHabitsByUserId(Long id) {
+        List<HabitEntity> lstHabitEntities = habitRepository.findByUserId(id);
+        return habitJpaMapper.toHabitsList(lstHabitEntities);
+    }
+
+    @Override
+    public List<Habit> getHabitsByDate(Long userId, LocalDate date) {
+        List<HabitEntity> lstHabitEntities = habitRepository.findHabitByUserIdAndDate(userId, date);
         return habitJpaMapper.toHabitsList(lstHabitEntities);
     }
     

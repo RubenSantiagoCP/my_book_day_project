@@ -15,6 +15,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +26,10 @@ import lombok.Setter;
 
 @Entity
 @Table(
-    name = "habit"
+    name = "habit",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"user_id", "name"})
+    }
 )
 @Getter
 @Setter
@@ -38,8 +43,9 @@ public class HabitEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     @Size(max = 100)
+    @NotBlank
     private String name;
 
     @Column

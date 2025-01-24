@@ -17,17 +17,20 @@ public interface IHabitJpaMapper {
     @Mapping(target = "user.habits", ignore = true)
     @Mapping(target = "user.categories", ignore = true)
     @Mapping(target = "category.user", ignore = true)
+    @Mapping(target = "category.habits", ignore = true)
     Habit toHabit(HabitEntity habitEntity);
 
     @Mapping(target = "user.tasks", ignore = true)
     @Mapping(target = "user.habits", ignore = true)
     @Mapping(target = "user.categories", ignore = true)
     @Mapping(target = "category.user", ignore = true)
+    @Mapping(target = "category.habits", ignore = true)
     HabitEntity toHabitEntity(Habit habit);
 
     @Mapping(target = "user.tasks", ignore = true)
     @Mapping(target = "user.habits", ignore = true)
     @Mapping(target = "user.categories", ignore = true)
     @Mapping(target = "category.user", ignore = true)
+    @Mapping(target = "category.habits", ignore = true)
     List<Habit> toHabitsList(List<HabitEntity> lstHabitEntities);
 }

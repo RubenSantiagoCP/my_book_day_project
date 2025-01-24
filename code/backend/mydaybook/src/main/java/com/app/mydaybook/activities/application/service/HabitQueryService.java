@@ -1,5 +1,6 @@
 package com.app.mydaybook.activities.application.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -22,8 +23,13 @@ public class HabitQueryService implements IHabitQueryPort{
     }
 
     @Override
-    public List<Habit> getAllHabits() {
-        return habitQueryPersistentPort.getAllHabits();
+    public List<Habit> getHabitsByUserId(Long id) {
+        return habitQueryPersistentPort.getHabitsByUserId(id);
+    }
+
+    @Override
+    public List<Habit> getHabitsByDate(Long userId, LocalDate date) {
+        return habitQueryPersistentPort.getHabitsByDate(userId, date);
     }
 
     
