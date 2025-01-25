@@ -6,6 +6,7 @@ import java.util.List;
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.entity.CategoryEntity;
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.entity.HabitEntity;
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.entity.TaskEntity;
+import com.app.mydaybook.daily.infrastructure.adapters.output.jpaAdapter.entity.DailyRecordEntity;
 import com.app.mydaybook.user.domain.enums.LoginType;
 
 import jakarta.persistence.Column;
@@ -74,5 +75,8 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user")
     private List<CategoryEntity> categories;
+
+    @OneToMany(mappedBy = "user")
+    private List<DailyRecordEntity> dailyRecords;
 
 }
