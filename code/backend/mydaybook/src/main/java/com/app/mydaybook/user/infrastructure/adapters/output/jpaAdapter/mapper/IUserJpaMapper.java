@@ -15,20 +15,24 @@ public interface IUserJpaMapper {
     @Mapping(target = "tasks", ignore = true)
     @Mapping(target = "habits", ignore = true)
     @Mapping(target = "categories", ignore = true)
+    @Mapping(target = "dailyRecords", ignore = true)
     User toUser(UserEntity userEntity);
 
     @Mapping(target = "tasks", ignore = true)
     @Mapping(target = "habits", ignore = true)
     @Mapping(target = "categories", ignore = true)
+    @Mapping(target = "dailyRecords", ignore = true)
     UserEntity toUserEntity(User user);
 
     @Mapping(target = "tasks", ignore = true)
     @Mapping(target = "habits", ignore = true)
     @Mapping(target = "categories", ignore = true)
+    @Mapping(target = "dailyRecords", ignore = true)
     List<User> toUserList(List<UserEntity> lstUserEntities);
 
     @Mapping(target = "tasks", ignore = true)
     @Mapping(target = "habits", ignore = true)
     @Mapping(target = "categories", ignore = true)
+    @Mapping(target = "dailyRecords", ignore = true)
     List<UserEntity> toUserEntities(List<User> users);
 }

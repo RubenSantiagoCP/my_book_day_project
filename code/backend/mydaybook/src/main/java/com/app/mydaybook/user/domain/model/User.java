@@ -6,6 +6,7 @@ import java.util.List;
 import com.app.mydaybook.activities.domain.model.Category;
 import com.app.mydaybook.activities.domain.model.Habit;
 import com.app.mydaybook.activities.domain.model.Task;
+import com.app.mydaybook.daily.domain.model.DailyRecord;
 import com.app.mydaybook.user.domain.enums.LoginType;
 
 import lombok.AllArgsConstructor;
@@ -33,4 +34,5 @@ public class User {
     private List<Habit> habits;
     private List<Task> tasks;
     private List<Category> categories;
+    private List<DailyRecord> dailyRecords;
 }
