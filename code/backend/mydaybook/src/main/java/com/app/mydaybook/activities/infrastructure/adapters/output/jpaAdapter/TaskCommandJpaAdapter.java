@@ -10,8 +10,6 @@ import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.ma
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.repository.ITaskRepository;
 import com.app.mydaybook.common.enums.exception.ErrorCode;
 import com.app.mydaybook.common.exception.ExceptionManager;
-import com.app.mydaybook.user.infrastructure.adapters.output.jpaAdapter.entity.UserEntity;
-import com.app.mydaybook.user.infrastructure.adapters.output.jpaAdapter.repository.IUserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,17 +18,13 @@ import lombok.RequiredArgsConstructor;
 public class TaskCommandJpaAdapter implements ITaskCommandPersistentPort {
 
     private final ITaskRepository taskRepository;
-    private final IUserRepository userRepository;
 
     private final ITaskJpaMapper taskJpaMapper;
     private final ExceptionManager exceptionManager;
 
     @Override
     public Task createTask(Task task) {
-        UserEntity userEntity = userRepository.findById(task.getUser().getId())
-                .orElseThrow(() -> exceptionManager.createException(ErrorCode.USER_NOT_FOUND));
         TaskEntity taskEntity = taskJpaMapper.toTaskEntity(task);
-        taskEntity.setUser(userEntity);
         try {
             taskEntity = taskRepository.save(taskEntity);
             return taskJpaMapper.toTask(taskEntity);
@@ -44,9 +38,7 @@ public class TaskCommandJpaAdapter implements ITaskCommandPersistentPort {
         TaskEntity taskEntity = taskRepository.findById(id)
                 .orElseThrow(() -> exceptionManager.createException(ErrorCode.TASK_NOT_FOUND));
         if (taskEntity.getUser().getId()==task.getUser().getId()) {
-
             try {
-
                 taskEntity.setDescription(task.getDescription());
                 taskEntity.setEndDate(task.getEndDate());
                 taskEntity.setFrequency(task.getFrequency());
@@ -68,11 +60,8 @@ public class TaskCommandJpaAdapter implements ITaskCommandPersistentPort {
     public boolean deleteTask(Long id) {
         TaskEntity taskEntity = taskRepository.findById(id)
                 .orElseThrow(() -> exceptionManager.createException(ErrorCode.TASK_NOT_FOUND));
-        if (taskEntity != null) {
             taskRepository.delete(taskEntity);
-            return true;
-        }
-        return false;
+        return true;
     }
 
 }

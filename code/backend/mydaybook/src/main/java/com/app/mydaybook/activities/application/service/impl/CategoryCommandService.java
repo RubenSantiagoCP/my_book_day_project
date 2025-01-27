@@ -1,4 +1,4 @@
-package com.app.mydaybook.activities.application.service;
+package com.app.mydaybook.activities.application.service.impl;
 
 
 import org.springframework.stereotype.Service;

@@ -39,5 +39,10 @@ public class HabitQueryJpaAdapter implements IHabitQueryPersistentPort{
         List<HabitEntity> lstHabitEntities = habitRepository.findHabitByUserIdAndDate(userId, date);
         return habitJpaMapper.toHabitsList(lstHabitEntities);
     }
+
+    @Override
+    public boolean existedConflictByName(String name, Long userId) {
+        return habitRepository.habitAlreadyExists(userId, name);
+    }
     
 }

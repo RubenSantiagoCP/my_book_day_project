@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.mydaybook.activities.application.service.TaskQueryService;
+import com.app.mydaybook.activities.application.service.impl.TaskQueryService;
 import com.app.mydaybook.activities.domain.model.Task;
 import com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.request.GetByDateRequest;
 import com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.response.TaskResponse;

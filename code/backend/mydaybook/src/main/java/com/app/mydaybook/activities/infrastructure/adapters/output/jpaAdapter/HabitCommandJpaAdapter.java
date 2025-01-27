@@ -12,8 +12,6 @@ import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.re
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.repository.IHabitRepository;
 import com.app.mydaybook.common.enums.exception.ErrorCode;
 import com.app.mydaybook.common.exception.ExceptionManager;
-import com.app.mydaybook.user.infrastructure.adapters.output.jpaAdapter.entity.UserEntity;
-import com.app.mydaybook.user.infrastructure.adapters.output.jpaAdapter.repository.IUserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,16 +25,12 @@ public class HabitCommandJpaAdapter implements IHabitCommandPersistentPort {
     private final IHabitJpaMapper habitJpaMapper;
 
     private final ExceptionManager exceptionManager;
-    private final IUserRepository userRepository;
 
     @Override
     public Habit createHabit(Habit habit) {
-        UserEntity userEntity = userRepository.findById(habit.getUser().getId())
-                .orElseThrow(() -> exceptionManager.createException(ErrorCode.USER_NOT_FOUND));
         if (habit.getCategory() != null) {
             CategoryEntity categoryEntity = verifiedCategoryExists(habit.getCategory().getId());
             HabitEntity habitEntity = habitJpaMapper.toHabitEntity(habit);
-            habitEntity.setUser(userEntity);
             habitEntity.setCategory(categoryEntity);
             try {
                 habitEntity = habitRepository.save(habitEntity);

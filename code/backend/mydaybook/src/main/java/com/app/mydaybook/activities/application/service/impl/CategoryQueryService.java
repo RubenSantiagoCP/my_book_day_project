@@ -1,4 +1,4 @@
-package com.app.mydaybook.activities.application.service;
+package com.app.mydaybook.activities.application.service.impl;
 
 import java.util.List;
 

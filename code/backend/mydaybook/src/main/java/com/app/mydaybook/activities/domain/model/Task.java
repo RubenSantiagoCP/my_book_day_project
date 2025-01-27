@@ -27,4 +27,8 @@ public class Task {
     private TaskFrequency frequency;
     private TaskState state;
     private User user;
+
+    public Long getUserId() {
+        return user.getId();
+    }
 }
