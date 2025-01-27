@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.mydaybook.activities.application.service.HabitCommandService;
+import com.app.mydaybook.activities.application.service.impl.HabitCommandService;
 import com.app.mydaybook.activities.domain.model.Habit;
 import com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.request.HabitRequest;
 import com.app.mydaybook.activities.infrastructure.adapters.input.rest.data.response.HabitResponse;

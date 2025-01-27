@@ -9,4 +9,5 @@ public interface IHabitQueryPersistentPort {
     public Habit getHabitById(Long id);
     public List<Habit> getHabitsByUserId(Long id);
     public List<Habit> getHabitsByDate(Long userId, LocalDate date);
+    public boolean existedConflictByName(String name, Long userId);
 }

@@ -1,10 +1,7 @@
-package com.app.mydaybook.activities.application.service;
-
+package com.app.mydaybook.activities.domain.services;
 
 import org.springframework.stereotype.Service;
 
-import com.app.mydaybook.activities.application.ports.input.IHabitCommandPort;
-import com.app.mydaybook.activities.application.ports.output.IHabitCommandPersistentPort;
 import com.app.mydaybook.activities.domain.enums.HabitFrequency;
 import com.app.mydaybook.activities.domain.model.Category;
 import com.app.mydaybook.activities.domain.model.Habit;
@@ -15,35 +12,17 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class HabitCommandService implements IHabitCommandPort {
-
-    private final IHabitCommandPersistentPort habitCommandPersistentPort;
+public class HabitValidator {
+    
     private final ExceptionManager exceptionManager;
 
-    @Override
-    public Habit createHabit(Habit habit) {
+    public void validateHabit(Habit habit) {
         validateEndDate(habit);
         validateCategory(habit);
         validateFrecuency(habit);
-        return habitCommandPersistentPort.createHabit(habit);
     }
 
-    @Override
-    public Habit updateHabit(Long id, Habit habit) {
-        validateEndDate(habit);
-        validateCategory(habit);
-        validateFrecuency(habit);
-        return habitCommandPersistentPort.updateHabit(id, habit);
-    }
-
-    @Override
-    public boolean deleteHabit(Long id) {
-        return habitCommandPersistentPort.deleteHabit(id);
-    }
-
-
-
-    private void validateEndDate(Habit habit) {
+     private void validateEndDate(Habit habit) {
         // Set default values for endDate
         if (habit.getEndDate() == null) {
             throw exceptionManager.createException(ErrorCode.HABIT_END_DATE_REQUIRED);
@@ -69,5 +48,4 @@ public class HabitCommandService implements IHabitCommandPort {
             habit.setCategory(category);
         }
     }
-
 }

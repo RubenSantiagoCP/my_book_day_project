@@ -1,6 +1,9 @@
 package com.app.mydaybook.daily.domain.model;
 
+import java.time.LocalDate;
+
 import com.app.mydaybook.activities.domain.model.Task;
+import com.app.mydaybook.user.domain.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +19,7 @@ import lombok.Setter;
 
 public class DailyTask {
     private Long id;
-    private DailyRecord dailyRecord;
+    private LocalDate date;
     private Task task;
-    private boolean isCompleted;
+    private User user;
 }

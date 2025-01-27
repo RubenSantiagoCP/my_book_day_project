@@ -26,4 +26,12 @@ public class Habit {
     private HabitFrequency frequency;
     private Category category;
     private User user;
+
+    public Long getUserId() {
+        return user.getId();
+    }
+
+    public Long getCategoryId() {
+        return category.getId();
+    }
 }
