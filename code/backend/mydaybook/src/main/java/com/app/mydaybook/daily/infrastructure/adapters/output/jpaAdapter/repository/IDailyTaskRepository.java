@@ -1,6 +1,7 @@
 package com.app.mydaybook.daily.infrastructure.adapters.output.jpaAdapter.repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,5 +13,10 @@ public interface IDailyTaskRepository extends JpaRepository<DailyTaskEntity, Lon
     @Query("SELECT dt FROM DailyTaskEntity dt WHERE dt.date = :date AND dt.user.id = :userId AND dt.task.id = :taskId")
     DailyTaskEntity findByDateAndUserIdAndTaskId(@Param("date") LocalDate date, @Param("userId") Long userId,
             @Param("taskId") Long taskId);
+
+    @Query("SELECT dt.task.id FROM DailyTaskEntity dt WHERE dt.date = :date AND dt.user.id = :userId")
+    List<Long> getDoneTasksByDate(
+        @Param("userId") Long userId,
+        @Param("date") LocalDate date);
 
 }

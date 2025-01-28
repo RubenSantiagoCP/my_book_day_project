@@ -13,10 +13,14 @@ public interface IDailyRecordJpaMapper {
     @Mapping(target = "user.tasks", ignore = true)
     @Mapping(target = "user.habits", ignore = true)
     @Mapping(target = "user.categories", ignore = true)
+    @Mapping(target = "user.dailyRecords", ignore = true)
+    @Mapping(target = "user.dailyTasks", ignore = true)
     DailyRecord toDailyRecord(DailyRecordEntity dailyRecordEntity);
 
     @Mapping(target = "user.tasks", ignore = true)
     @Mapping(target = "user.habits", ignore = true)
     @Mapping(target = "user.categories", ignore = true)
+    @Mapping(target = "user.dailyRecords", ignore = true)
+    @Mapping(target = "user.dailyTasks", ignore = true)
     DailyRecordEntity toDailyRecordEntity(DailyRecord dailyRecord);
 }

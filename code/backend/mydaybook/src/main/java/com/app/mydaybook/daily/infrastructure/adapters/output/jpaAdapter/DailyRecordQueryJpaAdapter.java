@@ -4,14 +4,12 @@ import java.time.LocalDate;
 
 import org.springframework.stereotype.Component;
 
-import com.app.mydaybook.common.enums.exception.ErrorCode;
-import com.app.mydaybook.common.exception.ExceptionManager;
 import com.app.mydaybook.daily.application.ports.output.IDailyRecordQueryPersistentPort;
 import com.app.mydaybook.daily.domain.model.DailyRecord;
 import com.app.mydaybook.daily.infrastructure.adapters.output.jpaAdapter.entity.DailyRecordEntity;
 import com.app.mydaybook.daily.infrastructure.adapters.output.jpaAdapter.mapper.IDailyRecordJpaMapper;
 import com.app.mydaybook.daily.infrastructure.adapters.output.jpaAdapter.repository.IDailyRecordRepository;
-import com.app.mydaybook.user.infrastructure.adapters.output.jpaAdapter.repository.IUserRepository;
+import com.app.mydaybook.user.application.service.UserValidationService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,17 +19,11 @@ public class DailyRecordQueryJpaAdapter implements IDailyRecordQueryPersistentPo
     
     private final IDailyRecordJpaMapper dailyRecordJpaMapper;
     private final IDailyRecordRepository dailyRecordRepository;
-
-    private final IUserRepository userRepository;
-
-    private final ExceptionManager exceptionManager;
-
+    private final UserValidationService userValidationService;
     
     @Override
     public DailyRecord getDailyRecordByDate(LocalDate date, Long userId) {
-        if(userRepository.findById(userId)==null){
-            throw exceptionManager.createException(ErrorCode.USER_NOT_FOUND);
-        }
+        userValidationService.validateUserExists(userId);
         DailyRecordEntity dailyRecordEntity = dailyRecordRepository.findByDateAndUserId(date, userId);
         return dailyRecordJpaMapper.toDailyRecord(dailyRecordEntity);
     }

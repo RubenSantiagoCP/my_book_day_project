@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class HabitConflictsValidation {
+public class HabitValidation {
     private final IHabitQueryPersistentPort habitQueryPersistentPort;
     private final ExceptionManager exceptionManager;
 

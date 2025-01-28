@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.mydaybook.activities.application.ports.input.ITaskCommandPort;
 import com.app.mydaybook.activities.application.ports.output.ITaskCommandPersistentPort;
-import com.app.mydaybook.activities.application.service.validation.TaskConflictsValidation;
+import com.app.mydaybook.activities.application.service.validation.TaskValidation;
 import com.app.mydaybook.activities.domain.model.Task;
 import com.app.mydaybook.activities.domain.services.TaskValidator;
 import com.app.mydaybook.user.application.service.UserValidationService;
@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class TaskCommandService implements ITaskCommandPort{
     private final ITaskCommandPersistentPort taskCommandPersistentPort;
     private final TaskValidator taskValidator;
-    private final TaskConflictsValidation taskConflictsValidation;
+    private final TaskValidation taskConflictsValidation;
     private final UserValidationService userValidationService;
 
 

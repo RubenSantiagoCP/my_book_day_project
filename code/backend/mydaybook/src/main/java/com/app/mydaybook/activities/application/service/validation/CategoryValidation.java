@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryConflictsValidation {
+public class CategoryValidation {
     private final ICategoryQueryPersistentPort categoryQueryPersistentPort;
     private final ExceptionManager exceptionManager;
 

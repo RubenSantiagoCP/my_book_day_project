@@ -52,4 +52,14 @@ public class TaskQueryJpaAdapter implements ITaskQueryPersistentPort {
                 task.getEndDate());
     }
 
+    @Override
+    public boolean existsTaskByUser(Long userId, Long taskId) {
+        return taskRepository.existsTaskByUser(userId, taskId);
+    }
+
+    @Override
+    public boolean existsTaskInDate(Long userId, LocalDate date, Long taskId) {
+        return taskRepository.existsTaskInDate(userId, taskId, date.atStartOfDay());
+    }
+
 }
