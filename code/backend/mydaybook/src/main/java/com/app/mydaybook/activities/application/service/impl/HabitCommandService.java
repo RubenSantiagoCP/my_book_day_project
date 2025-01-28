@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.mydaybook.activities.application.ports.input.IHabitCommandPort;
 import com.app.mydaybook.activities.application.ports.output.IHabitCommandPersistentPort;
+import com.app.mydaybook.activities.application.service.validation.CategoryConflictsValidation;
 import com.app.mydaybook.activities.application.service.validation.HabitConflictsValidation;
 import com.app.mydaybook.activities.domain.model.Habit;
 import com.app.mydaybook.activities.domain.services.HabitValidator;
@@ -19,6 +20,7 @@ public class HabitCommandService implements IHabitCommandPort {
     private final IHabitCommandPersistentPort habitCommandPersistentPort;
     private final UserValidationService userValidationService;
     private final HabitConflictsValidation habitConflictsValidation;
+    private final CategoryConflictsValidation categoryConflictsValidation;
 
     private final HabitValidator habitValidator;
 
@@ -27,6 +29,7 @@ public class HabitCommandService implements IHabitCommandPort {
     public Habit createHabit(Habit habit) {
         habitValidator.validateHabit(habit);
         userValidationService.validateUserExists(habit.getUserId());
+        categoryConflictsValidation.existsCategoryByUser(habit.getUserId(), habit.getCategoryId());
         habitConflictsValidation.validateConflictName(habit.getName(), habit.getUserId());
         return habitCommandPersistentPort.createHabit(habit);
     }
@@ -35,6 +38,7 @@ public class HabitCommandService implements IHabitCommandPort {
     public Habit updateHabit(Long id, Habit habit) {
         habitValidator.validateHabit(habit);
         userValidationService.validateUserExists(habit.getUserId());
+        categoryConflictsValidation.existsCategoryByUser(habit.getUserId(), habit.getCategoryId());
         habitConflictsValidation.validateConflictName(habit.getName(), habit.getUserId());
         return habitCommandPersistentPort.updateHabit(id, habit);
     }
