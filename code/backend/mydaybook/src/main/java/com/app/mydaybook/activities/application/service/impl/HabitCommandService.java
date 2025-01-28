@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.app.mydaybook.activities.application.ports.input.IHabitCommandPort;
 import com.app.mydaybook.activities.application.ports.output.IHabitCommandPersistentPort;
-import com.app.mydaybook.activities.application.service.validation.CategoryConflictsValidation;
-import com.app.mydaybook.activities.application.service.validation.HabitConflictsValidation;
+import com.app.mydaybook.activities.application.service.validation.CategoryValidation;
+import com.app.mydaybook.activities.application.service.validation.HabitValidation;
 import com.app.mydaybook.activities.domain.model.Habit;
 import com.app.mydaybook.activities.domain.services.HabitValidator;
 import com.app.mydaybook.user.application.service.UserValidationService;
@@ -19,8 +19,8 @@ public class HabitCommandService implements IHabitCommandPort {
 
     private final IHabitCommandPersistentPort habitCommandPersistentPort;
     private final UserValidationService userValidationService;
-    private final HabitConflictsValidation habitConflictsValidation;
-    private final CategoryConflictsValidation categoryConflictsValidation;
+    private final HabitValidation habitConflictsValidation;
+    private final CategoryValidation categoryConflictsValidation;
 
     private final HabitValidator habitValidator;
 

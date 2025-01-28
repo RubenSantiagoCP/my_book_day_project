@@ -7,7 +7,6 @@ import com.app.mydaybook.daily.domain.model.DailyTask;
 import com.app.mydaybook.daily.infrastructure.adapters.output.jpaAdapter.entity.DailyTaskEntity;
 import com.app.mydaybook.daily.infrastructure.adapters.output.jpaAdapter.mapper.IDailyTaskJpaMapper;
 import com.app.mydaybook.daily.infrastructure.adapters.output.jpaAdapter.repository.IDailyTaskRepository;
-import com.app.mydaybook.daily.infrastructure.adapters.output.jpaAdapter.services.IDailyTaskValidationService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,12 +16,10 @@ public class DailyTaskCommandAdapter implements IDailyTaskCommPersitentPort{
     
     private final IDailyTaskRepository dailyTaskRepository;
     private final IDailyTaskJpaMapper dailyTaskJpaMapper;
-    private final IDailyTaskValidationService dailyTaskValidationService;
 
 
     @Override
     public void markTaskDone(DailyTask dailyTask) {
-        dailyTaskValidationService.validateUserAndTask(dailyTask);
         DailyTaskEntity dailyTaskEntity = dailyTaskRepository.findByDateAndUserIdAndTaskId(dailyTask.getDate(), dailyTask.getUser().getId(), dailyTask.getTask().getId());
         if(dailyTaskEntity==null){
             dailyTaskEntity = dailyTaskJpaMapper.toDailyTaskEntity(dailyTask);
@@ -32,7 +29,6 @@ public class DailyTaskCommandAdapter implements IDailyTaskCommPersitentPort{
 
     @Override
     public void markTaskUndone(DailyTask dailyTask) {
-        dailyTaskValidationService.validateUserAndTask(dailyTask);
         DailyTaskEntity dailyTaskEntity = dailyTaskRepository.findByDateAndUserIdAndTaskId(dailyTask.getDate(), dailyTask.getUser().getId(), dailyTask.getTask().getId());
         if(dailyTaskEntity!=null){
             dailyTaskRepository.delete(dailyTaskEntity);;

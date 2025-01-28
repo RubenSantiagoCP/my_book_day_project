@@ -1,4 +1,4 @@
-package com.app.mydaybook.daily.application.service;
+package com.app.mydaybook.daily.application.service.impl;
 
 import java.time.LocalDate;
 
@@ -8,6 +8,7 @@ import com.app.mydaybook.daily.application.ports.input.IDailyRecordCommandServic
 import com.app.mydaybook.daily.application.ports.output.IDailyRecordCommandPersistentPort;
 import com.app.mydaybook.daily.application.ports.output.IDailyRecordQueryPersistentPort;
 import com.app.mydaybook.daily.domain.model.DailyRecord;
+import com.app.mydaybook.user.application.service.UserValidationService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,9 +18,11 @@ public class DailyRecordCommandService implements IDailyRecordCommandService{
     
     private final IDailyRecordCommandPersistentPort commandPersistentPort;
     private final IDailyRecordQueryPersistentPort queryPersistentPort;
+    private final UserValidationService userValidationService;
 
     @Override
     public DailyRecord createDailyRecord(DailyRecord dailyRecord) {
+        userValidationService.validateUserExists(dailyRecord.getUserId());
         DailyRecord dailyRecordVerified = verifDailyRecordByDate(dailyRecord.getDate(), dailyRecord.getUser().getId());
         if (dailyRecordVerified != null) {
             return this.updateDailyRecord(dailyRecord);
@@ -29,6 +32,7 @@ public class DailyRecordCommandService implements IDailyRecordCommandService{
 
     @Override
     public DailyRecord updateDailyRecord(DailyRecord dailyRecord) {
+        userValidationService.validateUserExists(dailyRecord.getUserId());
         return commandPersistentPort.updateDailyRecord(dailyRecord);
     }
 

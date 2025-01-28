@@ -10,4 +10,6 @@ public interface ITaskQueryPersistentPort {
     List<Task> getTasksByUserId(Long userId);
     List<Task> getTasksByDate(Long userId, LocalDate date);
     boolean existsConflictByUserAndTitleAndDateRange(Task task);
+    boolean existsTaskByUser(Long userId, Long taskId);
+    boolean existsTaskInDate(Long userId, LocalDate date, Long taskId);
 }

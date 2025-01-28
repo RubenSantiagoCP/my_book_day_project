@@ -24,4 +24,8 @@ public class DailyRecord {
     //private EmotionalState emotionalState;
     private String notes;
     private User user;
+
+    public Long getUserId() {
+        return user.getId();
+    }
 }

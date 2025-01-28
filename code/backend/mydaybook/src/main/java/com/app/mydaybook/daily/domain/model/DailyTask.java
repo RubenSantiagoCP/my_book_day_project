@@ -22,4 +22,12 @@ public class DailyTask {
     private LocalDate date;
     private Task task;
     private User user;
+
+    public Long getUserId() {
+        return user.getId();
+    }
+
+    public Long getTaskId() {
+        return task.getId();
+    }
 }

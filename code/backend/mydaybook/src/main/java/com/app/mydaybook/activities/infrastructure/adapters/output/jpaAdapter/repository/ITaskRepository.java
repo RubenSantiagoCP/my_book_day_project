@@ -9,20 +9,31 @@ import org.springframework.data.repository.query.Param;
 import com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.entity.TaskEntity;
 
 public interface ITaskRepository extends JpaRepository<TaskEntity, Long> {
-    @Query("SELECT t FROM TaskEntity t WHERE t.user.id = :userId AND :date BETWEEN t.startDate AND t.endDate")
-    List<TaskEntity> findTasksByUserIdAndDate(
-            @Param("userId") Long userId,
-            @Param("date") LocalDateTime date);
+        @Query("SELECT t FROM TaskEntity t WHERE t.user.id = :userId AND :date BETWEEN t.startDate AND t.endDate")
+        List<TaskEntity> findTasksByUserIdAndDate(
+                        @Param("userId") Long userId,
+                        @Param("date") LocalDateTime date);
 
-    @Query("SELECT COUNT(t) > 0 FROM TaskEntity t " +
-            "WHERE t.user.id = :userId " +
-            "AND t.title = :title " +
-            "AND ((t.startDate <= :endDate AND t.endDate >= :startDate))")
-    boolean existsConflictByUserAndTitleAndDateRange(
-            @Param("userId") Long userId,
-            @Param("title") String title,
-            @Param("startDate") LocalDateTime startDate,
-            @Param("endDate") LocalDateTime endDate);
+        @Query("SELECT COUNT(t) > 0 FROM TaskEntity t " +
+                        "WHERE t.user.id = :userId " +
+                        "AND t.title = :title " +
+                        "AND ((t.startDate <= :endDate AND t.endDate >= :startDate))")
+        boolean existsConflictByUserAndTitleAndDateRange(
+                        @Param("userId") Long userId,
+                        @Param("title") String title,
+                        @Param("startDate") LocalDateTime startDate,
+                        @Param("endDate") LocalDateTime endDate);
 
-    List<TaskEntity> findByUserId(Long userId);
+        List<TaskEntity> findByUserId(Long userId);
+
+        @Query("SELECT COUNT(t) FROM TaskEntity t WHERE t.user.id = :userId AND t.id = :taskId")
+        boolean existsTaskByUser(
+                        @Param("userId") Long userId,
+                        @Param("taskId") Long taskId);
+
+        @Query("SELECT COUNT(t)>0 FROM TaskEntity t WHERE t.user.id = :userId AND :date BETWEEN t.startDate AND t.endDate AND t.id = :taskId")
+        boolean existsTaskInDate(
+                        @Param("userId") Long userId,
+                        @Param("taskId") Long taskId,
+                        @Param("date") LocalDateTime date);
 }
