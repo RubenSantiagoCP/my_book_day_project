@@ -39,7 +39,7 @@ public class TaskQueryJpaAdapter implements ITaskQueryPersistentPort {
 
     @Override
     public List<Task> getTasksByDate(Long userId, LocalDate date) {
-        List<TaskEntity> lTaskEntities = taskRepository.findTasksByUserIdAndDate(userId, date);
+        List<TaskEntity> lTaskEntities = taskRepository.findTasksByUserIdAndDate(userId, date.atStartOfDay());
         return taskJpaMapper.toTaskList(lTaskEntities);
     }
 

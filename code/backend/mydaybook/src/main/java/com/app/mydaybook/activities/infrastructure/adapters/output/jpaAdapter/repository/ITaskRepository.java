@@ -1,6 +1,5 @@
 package com.app.mydaybook.activities.infrastructure.adapters.output.jpaAdapter.repository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,7 +12,7 @@ public interface ITaskRepository extends JpaRepository<TaskEntity, Long> {
     @Query("SELECT t FROM TaskEntity t WHERE t.user.id = :userId AND :date BETWEEN t.startDate AND t.endDate")
     List<TaskEntity> findTasksByUserIdAndDate(
             @Param("userId") Long userId,
-            @Param("date") LocalDate date);
+            @Param("date") LocalDateTime date);
 
     @Query("SELECT COUNT(t) > 0 FROM TaskEntity t " +
             "WHERE t.user.id = :userId " +

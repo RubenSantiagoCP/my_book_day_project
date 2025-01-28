@@ -19,4 +19,5 @@ public class HabitConflictsValidation {
             throw exceptionManager.createException(ErrorCode.HABIT_ALREADY_EXISTS);
         }
     }
+
 }

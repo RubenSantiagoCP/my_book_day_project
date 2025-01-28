@@ -36,7 +36,7 @@ public class HabitQueryJpaAdapter implements IHabitQueryPersistentPort{
 
     @Override
     public List<Habit> getHabitsByDate(Long userId, LocalDate date) {
-        List<HabitEntity> lstHabitEntities = habitRepository.findHabitByUserIdAndDate(userId, date);
+        List<HabitEntity> lstHabitEntities = habitRepository.findHabitByUserIdAndDate(userId, date.atStartOfDay());
         return habitJpaMapper.toHabitsList(lstHabitEntities);
     }
 

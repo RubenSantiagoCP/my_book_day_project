@@ -36,4 +36,14 @@ public class CategoryQueryJpaAdapter implements ICategoryQueryPersistentPort {
         return categoryJpaMapper.toCategoryList(lstCategoryEntities);
     }
 
+    @Override
+    public boolean existedConflictByName(String name, Long userId) {
+        return categoryRepository.existedConflictByName( userId, name);
+    }
+
+    @Override
+    public boolean existedCategoryByUser(Long userId, Long categoryId) {
+        return categoryRepository.existedCategoryByUser(userId, categoryId);
+    }
+
 }

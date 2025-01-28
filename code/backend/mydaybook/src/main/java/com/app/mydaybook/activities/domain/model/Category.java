@@ -22,4 +22,8 @@ public class Category {
     private String description;
     private User user;
     private List<Habit> habits;
+
+    public Long getUserId(){
+        return user.getId();
+    }
 }
