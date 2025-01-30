@@ -1,0 +1,12 @@
+# Node modules (dependencias)
+node_modules/
+
+# Build de producción
+dist/
+
+# Configuración del entorno (puede contener claves API)
+src/environments/*.ts
+
+# Caché y logs
+package-lock.json
+npm-debug.log
